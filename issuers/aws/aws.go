@@ -45,8 +45,7 @@ type Issuer struct {
 	signAlgo acmpca.SigningAlgorithm
 }
 
-// Issue issues a certificate from the configured AWS CA backend.
-func (i Issuer) Issue(ctx context.Context, commonName string, conf *certify.CertConfig) (*tls.Certificate, error) {
+func (i *Issuer) GetCA(ctx context.Context) (*x509.Certificate, error) {
 	if i.caCert == nil {
 		caReq := i.Client.GetCertificateAuthorityCertificateRequest(&acmpca.GetCertificateAuthorityCertificateInput{
 			CertificateAuthorityArn: aws.String(i.CertificateAuthorityARN),
@@ -87,6 +86,15 @@ func (i Issuer) Issue(ctx context.Context, commonName string, conf *certify.Cert
 		default:
 			return nil, fmt.Errorf("unsupported CA cert signing algorithm: %T", i.caCert.SignatureAlgorithm)
 		}
+	}
+
+	return i.caCert, nil
+}
+
+// Issue issues a certificate from the configured AWS CA backend.
+func (i Issuer) Issue(ctx context.Context, commonName string, conf *certify.CertConfig) (*tls.Certificate, error) {
+	if _, err := i.GetCA(ctx); err != nil {
+		return nil, err
 	}
 
 	csrPEM, keyPEM, err := csr.FromCertConfig(commonName, conf)
