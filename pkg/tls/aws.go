@@ -13,8 +13,8 @@ import (
 	"github.com/johanbrandhorst/certify"
 	"github.com/sirupsen/logrus"
 
-	aws "github.com/robopuff/certify-aws-issuer/pkg/issuer"
-	"github.com/robopuff/certify-aws-issuer/pkg/logger"
+	aws "github.com/mytheresa/certify-aws-issuer/pkg/issuer"
+	"github.com/mytheresa/certify-aws-issuer/pkg/logger"
 )
 
 // NewAWSIssuer creates a new instance of AWS issuer

@@ -14,7 +14,7 @@ import (
 
 	"github.com/johanbrandhorst/certify"
 
-	"github.com/robopuff/certify-aws-issuer/internal/csr"
+	"github.com/mytheresa/certify-aws-issuer/internal/csr"
 )
 
 // Issuer implements the Issuer interface with a

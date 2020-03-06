@@ -8,7 +8,7 @@ import (
 
 	"github.com/johanbrandhorst/certify"
 
-	"github.com/robopuff/certify-aws-issuer/internal/keys"
+	"github.com/mytheresa/certify-aws-issuer/internal/keys"
 )
 
 // FromCertConfig creates a CSR and private key from the input config and common name.
